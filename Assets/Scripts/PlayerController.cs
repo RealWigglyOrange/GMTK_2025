@@ -21,6 +21,6 @@ public class PlayerController : MonoBehaviour
         Vin = Input.GetAxis("Vertical");
         Hin = Input.GetAxis("Horizontal");
 
-        transform.position += Vector3.Normalize(new Vector3(Hin * speed, Vin * speed)) * Time.deltaTime;
+        transform.position += Vector3.Normalize(new Vector3(Hin, Vin)) * speed * Time.deltaTime;
     }
 }
