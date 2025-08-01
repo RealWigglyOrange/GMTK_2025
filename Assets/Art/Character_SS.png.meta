@@ -1,7 +1,13 @@
 fileFormatVersion: 2
-guid: 0fb161f991166fc419b07246493e4317
+guid: f8fa87b8444c93b4aa2eb7f905230275
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2907207914147765162
+    second: Character_SS_2_0
+  - first:
+      213: 2145790084169322911
+    second: Character_SS_2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -69,20 +75,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: 4
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -94,7 +87,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Server
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -131,59 +124,15 @@ TextureImporter:
         width: 8
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: d462a97e0eba79c4cae8f45e024d8c73
-      internalID: -408776539
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dead_Front
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 16
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 736ba2c9b866220478b08f11f056f5e4
-      internalID: -1106858476
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Angry_Front
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d8460b70d8e0ea48be8f9506a6a19d7
-      internalID: -1467768668
+      spriteID: aab5bf2e13a785820800000000000000
+      internalID: 2907207914147765162
       vertices: []
       indices: 
       edges: []
@@ -197,15 +146,59 @@ TextureImporter:
         width: 8
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f91d77176b067cd10800000000000000
+      internalID: 2145790084169322911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dead_Front
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 16
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04d97b46d179f9b4ba6179cf1816218d
-      internalID: -756746517
+      spriteID: c273b05423e6215059c5d500622dd507
+      internalID: -528339359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angry_Front
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65933fc6409a60af5aff1501b63d30e8
+      internalID: -74109664
       vertices: []
       indices: 
       edges: []
@@ -226,8 +219,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b83f7210a9c802744bef4a4c3dad7c48
-      internalID: 992204722
+      spriteID: 22d37677294df52249e48d94418e6ad7
+      internalID: -869813512
       vertices: []
       indices: 
       edges: []
@@ -248,8 +241,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e104557ed561a72449e059c8aa15a519
-      internalID: 1865081765
+      spriteID: fa44663351df14fe782a66467500ace2
+      internalID: -1950326286
       vertices: []
       indices: 
       edges: []
@@ -258,7 +251,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 83f21c09ea2c0955e9fa60d3e1b771d0
     internalID: 0
     vertices: []
     indices: 
@@ -268,12 +261,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Angry_Back: 1865081765
-      Angry_Front: -1467768668
-      Dead_Back: 992204722
-      Dead_Front: -1106858476
-      Happy_Back: -756746517
-      Happy_Front: -408776539
+      Angry_Back: -1950326286
+      Angry_Front: -74109664
+      Dead_Back: -869813512
+      Dead_Front: -528339359
+      Happy_Back: 2145790084169322911
+      Happy_Front: 2907207914147765162
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

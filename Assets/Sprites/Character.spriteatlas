@@ -31,33 +31,14 @@ SpriteAtlas:
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
-    packables:
-    - {fileID: 2800000, guid: 0fb161f991166fc419b07246493e4317, type: 3}
+    packables: []
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
-    packedSpriteRenderDataKeys:
-    - 0fb161f991166fc419b07246493e4317: 1865081765
-    - 0fb161f991166fc419b07246493e4317: -1106858476
-    - 0fb161f991166fc419b07246493e4317: -1467768668
-    - 0fb161f991166fc419b07246493e4317: -408776539
-    - 0fb161f991166fc419b07246493e4317: -756746517
-    - 0fb161f991166fc419b07246493e4317: 992204722
+    packedSpriteRenderDataKeys: []
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites:
-  - {fileID: 1865081765, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  - {fileID: -1106858476, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  - {fileID: -1467768668, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  - {fileID: -408776539, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  - {fileID: -756746517, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  - {fileID: 992204722, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  m_PackedSpriteNamesToIndex:
-  - Angry_Back
-  - Dead_Front
-  - Angry_Front
-  - Happy_Front
-  - Happy_Back
-  - Dead_Back
+  m_PackedSprites: []
+  m_PackedSpriteNamesToIndex: []
   m_RenderDataMap: {}
   m_Tag: Character
   m_IsVariant: 0

@@ -703,12 +703,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1614561974}
-  fhappy: {fileID: -408776539, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  bhappy: {fileID: -756746517, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  fdead: {fileID: -1106858476, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  bdead: {fileID: 992204722, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  fangry: {fileID: -1467768668, guid: 0fb161f991166fc419b07246493e4317, type: 3}
-  bangry: {fileID: 1865081765, guid: 0fb161f991166fc419b07246493e4317, type: 3}
+  fhappy: {fileID: 2907207914147765162, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
+  bhappy: {fileID: 2145790084169322911, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
+  fdead: {fileID: -528339359, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
+  bdead: {fileID: -869813512, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
+  fangry: {fileID: -74109664, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
+  bangry: {fileID: -1950326286, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   interacting: 0
   speed: 5
 --- !u!212 &1614561974
@@ -755,7 +755,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -408776539, guid: 0fb161f991166fc419b07246493e4317, type: 3}
+  m_Sprite: {fileID: 2907207914147765162, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
