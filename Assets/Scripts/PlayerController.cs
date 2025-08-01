@@ -27,11 +27,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vin = Input.GetAxis("Vertical");
-        Hin = Input.GetAxis("Horizontal");
-        interacting = Input.GetKey(KeyCode.F);
+        GetInput();
 
-        transform.position += Vector3.Normalize(new Vector3(Hin, Vin)) * speed * Time.deltaTime;
 
         if (Vin > 0)
         {
@@ -40,6 +37,23 @@ public class PlayerController : MonoBehaviour
         {
             spriteRenderer.sprite = fhappy;
         }
+    }
+
+    void FixedUpdate()
+    {
+        Movement(Time.fixedDeltaTime);
+    }
+
+    void GetInput()
+    {
+        Vin = Input.GetAxis("Vertical");
+        Hin = Input.GetAxis("Horizontal");
+        interacting = Input.GetKey(KeyCode.F);
+    }
+
+    void Movement(float t)
+    {
+        transform.position += Vector3.Normalize(new Vector3(Hin, Vin)) * speed * t;
     }
 
     public void resetPlayer()
