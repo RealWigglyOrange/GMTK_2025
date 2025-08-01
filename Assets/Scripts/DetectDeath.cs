@@ -50,6 +50,7 @@ public class DetectDeath : MonoBehaviour
             player.resetPlayer();
             localTimer = 5;
             isdead = false;
+            player.transform.position = new Vector3(0.0f, 0.0f);
         }
     }
 }
