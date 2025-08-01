@@ -16,32 +16,40 @@ public class DetectDeath : MonoBehaviour
     {
         if (GM.timer >= 60)
         {
-            isdead = true;
+            killPlayer();
+        }
+    }
 
-            if (player.spriteRenderer.sprite == player.fhappy || player.spriteRenderer.sprite == player.fangry)
-            {
-                player.spriteRenderer.sprite = player.fdead;
-            } else if (player.spriteRenderer.sprite == player.bhappy || player.spriteRenderer.sprite == player.bangry)
-            {
-                player.spriteRenderer.sprite = player.bdead;
-            } else if (player.spriteRenderer.sprite == player.lhappy || player.spriteRenderer.sprite == player.langry)
-            {
-                player.spriteRenderer.sprite = player.ldead;
-            } else if (player.spriteRenderer.sprite == player.rhappy || player.spriteRenderer.sprite == player.rangry)
-            {
-                player.spriteRenderer.sprite = player.rdead;
-            }
+    void killPlayer()
+    {
+        isdead = true;
 
-            localTimer -= Time.deltaTime;
+        if (player.spriteRenderer.sprite == player.fhappy || player.spriteRenderer.sprite == player.fangry)
+        {
+            player.spriteRenderer.sprite = player.fdead;
+        }
+        else if (player.spriteRenderer.sprite == player.bhappy || player.spriteRenderer.sprite == player.bangry)
+        {
+            player.spriteRenderer.sprite = player.bdead;
+        }
+        else if (player.spriteRenderer.sprite == player.lhappy || player.spriteRenderer.sprite == player.langry)
+        {
+            player.spriteRenderer.sprite = player.ldead;
+        }
+        else if (player.spriteRenderer.sprite == player.rhappy || player.spriteRenderer.sprite == player.rangry)
+        {
+            player.spriteRenderer.sprite = player.rdead;
+        }
 
-            if (localTimer <= 0)
-            {
-                GM.timer = 0;
-                Progress.clear();
-                player.resetPlayer();
-                localTimer = 5;
-                isdead = false;
-            }
+        localTimer -= Time.deltaTime;
+
+        if (localTimer <= 0)
+        {
+            GM.timer = 0;
+            Progress.clear();
+            player.resetPlayer();
+            localTimer = 5;
+            isdead = false;
         }
     }
 }
