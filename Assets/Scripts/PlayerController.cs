@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
         West
     }
     public SpriteRenderer spriteRenderer;
+    [SerializeField] private DetectDeath death;
 
     [Header("Sprites")]
     public Sprite fhappy;
@@ -46,10 +47,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInput();
-        GetDirection();
-        UpdateSprite();
-        TryInteract();
+        if (!death.isdead)
+        {
+            GetInput();
+            GetDirection();
+            UpdateSprite();
+            TryInteract();
+        }
     }
 
     void FixedUpdate()

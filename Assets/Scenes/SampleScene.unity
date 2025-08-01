@@ -749,6 +749,7 @@ MonoBehaviour:
   player: {fileID: 1614561973}
   GM: {fileID: 1612959368}
   Progress: {fileID: 710229538}
+  isdead: 0
 --- !u!4 &827756246
 Transform:
   m_ObjectHideFlags: 0
@@ -1049,6 +1050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1614561974}
+  death: {fileID: 827756245}
   fhappy: {fileID: 2907207914147765162, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   bhappy: {fileID: 2145790084169322911, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   lhappy: {fileID: 1741733234, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}

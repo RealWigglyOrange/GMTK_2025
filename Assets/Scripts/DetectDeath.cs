@@ -9,12 +9,15 @@ public class DetectDeath : MonoBehaviour
     [SerializeField] private Progress Progress;
 
     private float localTimer = 5;
+    public bool isdead = false;
 
     // Update is called once per frame
     void Update()
     {
         if (GM.timer >= 60)
         {
+            isdead = true;
+
             if (player.spriteRenderer.sprite == player.fhappy || player.spriteRenderer.sprite == player.fangry)
             {
                 player.spriteRenderer.sprite = player.fdead;
@@ -37,6 +40,7 @@ public class DetectDeath : MonoBehaviour
                 Progress.clear();
                 player.resetPlayer();
                 localTimer = 5;
+                isdead = false;
             }
         }
     }
