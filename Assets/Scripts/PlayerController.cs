@@ -134,6 +134,7 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
                 {
                     interactable.interact();
+                    interacting = true;
                 }
             }
         }

@@ -1,10 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class Computer : MonoBehaviour, IInteractable
 {
     public void interact()
     {
-        Debug.Log("Computer interacted with");
+        UserInterface.instance.show("Computer");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
