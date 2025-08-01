@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: f8fa87b8444c93b4aa2eb7f905230275
+guid: 2d48169dc3e0b3ca2b7d84e6ececb0f2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2907207914147765162
-    second: Character_SS_2_0
-  - first:
-      213: 2145790084169322911
-    second: Character_SS_2_1
+      213: 2091874019871762923
+    second: 01_Bookshelf 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -116,100 +113,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Happy_Front
+      name: 01_Bookshelf 1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: aab5bf2e13a785820800000000000000
-      internalID: 2907207914147765162
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Happy_Back
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 5
         y: 0
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f91d77176b067cd10800000000000000
-      internalID: 2145790084169322911
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dead_Front
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 16
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c273b05423e6215059c5d500622dd507
-      internalID: -528339359
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Angry_Front
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65933fc6409a60af5aff1501b63d30e8
-      internalID: -74109664
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dead_Back
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 0
-        width: 8
+        width: 22
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -217,32 +126,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 22d37677294df52249e48d94418e6ad7
-      internalID: -869813512
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Angry_Back
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fa44663351df14fe782a66467500ace2
-      internalID: -1950326286
+      spriteID: be9235d7654d70d10800000000000000
+      internalID: 2091874019871762923
       vertices: []
       indices: 
       edges: []
@@ -251,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 83f21c09ea2c0955e9fa60d3e1b771d0
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -261,12 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Angry_Back: -1950326286
-      Angry_Front: -74109664
-      Dead_Back: -869813512
-      Dead_Front: -528339359
-      Happy_Back: 2145790084169322911
-      Happy_Front: 2907207914147765162
+      01_Bookshelf 1_0: 2091874019871762923
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
