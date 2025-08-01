@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class GameMode : MonoBehaviour
 {
-    [SerializeField] public float timer;
+    [SerializeField] private PlayerController player;
+
+    public float timer;
+    public float minutes;
 
     void Update()
     {
-        timer += Time.deltaTime;
+        if (player.fastForwarding)
+        {
+            timer += 5 * Time.deltaTime;
+        }
+        else
+        {
+            timer += Time.deltaTime;
+        }
+        minutes = Mathf.Floor(timer / 5);
     }
 }

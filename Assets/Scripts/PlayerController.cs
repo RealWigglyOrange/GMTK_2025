@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private float Hin;
     public bool tryInteract;
     public bool interacting;
+    public bool fastForwarding;
     public Direction direction;
 
     public float speed;
@@ -53,6 +54,15 @@ public class PlayerController : MonoBehaviour
             GetDirection();
             UpdateSprite();
             TryInteract();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            fastForwarding = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            fastForwarding = false;
         }
     }
 
