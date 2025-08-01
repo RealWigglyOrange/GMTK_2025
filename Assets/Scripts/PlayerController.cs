@@ -2,8 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PlayerController : MonoBehaviour
 {
+    public enum Direction
+    {
+        North,
+        East,
+        South,
+        West
+    }
     public SpriteRenderer spriteRenderer;
 
     [Header("Sprites")]
@@ -22,21 +31,25 @@ public class PlayerController : MonoBehaviour
 
     private float Vin;
     private float Hin;
+    public bool tryInteract;
     public bool interacting;
+    public Direction direction;
 
     public float speed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         GetInput();
+        GetDirection();
         UpdateSprite();
+        TryInteract();
     }
 
     void FixedUpdate()
@@ -48,26 +61,77 @@ public class PlayerController : MonoBehaviour
     {
         Vin = Input.GetAxis("Vertical");
         Hin = Input.GetAxis("Horizontal");
-        interacting = Input.GetKey(KeyCode.F);
+        tryInteract = Input.GetKeyDown(KeyCode.F);
     }
 
     void UpdateSprite()
     {
+        switch (direction)
+        {
+            case Direction.North:
+                spriteRenderer.sprite = bhappy;
+                break;
+            case Direction.South:
+                spriteRenderer.sprite = fhappy;
+                break;
+            case Direction.East:
+                spriteRenderer.sprite = rhappy;
+                break;
+            case Direction.West:
+                spriteRenderer.sprite = lhappy;
+                break;
+        }
+    }
+
+    void GetDirection()
+    {
         if (Vin > 0)
         {
-            spriteRenderer.sprite = bhappy;
+            direction = Direction.North;
         }
         else if (Vin < 0)
         {
-            spriteRenderer.sprite = fhappy;
+            direction = Direction.South;
         }
         else if (Hin > 0)
         {
-            spriteRenderer.sprite = rhappy;
+            direction = Direction.East;
         }
         else if (Hin < 0)
         {
-            spriteRenderer.sprite = lhappy;
+            direction = Direction.West;
+        } 
+    }
+
+    void TryInteract()
+    {
+        if (tryInteract)
+        {
+            Vector2 castDirection = Vector2.zero;
+            switch (direction)
+            {
+                case Direction.North:
+                    castDirection = Vector2.up;
+                    break;
+                case Direction.South:
+                    castDirection = Vector2.down;
+                    break;
+                case Direction.East:
+                    castDirection = Vector2.right;
+                    break;
+                case Direction.West:
+                    castDirection = Vector2.left;
+                    break;
+            }
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, castDirection, 1.0f);
+            if (hit)
+            {
+                // Debug.Log(hit.collider.gameObject.name);
+                if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
+                {
+                    interactable.interact();
+                }
+            }
         }
     }
 

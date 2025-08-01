@@ -1061,7 +1061,9 @@ MonoBehaviour:
   bangry: {fileID: -1950326286, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   langry: {fileID: 887415845, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   rangry: {fileID: 371030718, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
+  tryInteract: 0
   interacting: 0
+  direction: 0
   speed: 5
 --- !u!212 &1614561974
 SpriteRenderer:
