@@ -203,3 +203,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f300809e58e2842a6155269c2e953c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionTree: {fileID: 11400000, guid: 7b6835363468dec929bc5961a6a799e2, type: 2}

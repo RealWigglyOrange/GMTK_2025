@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!death.isdead)
+        if (!death.isdead && !interacting)
         {
             GetInput();
             GetDirection();
@@ -62,7 +62,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Movement(Time.fixedDeltaTime);
+        if (!death.isdead && !interacting)
+        {
+            Movement(Time.fixedDeltaTime);
+        }
     }
 
     void GetInput()
