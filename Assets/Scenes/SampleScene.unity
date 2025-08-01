@@ -1055,12 +1055,12 @@ MonoBehaviour:
   rhappy: {fileID: -1225604640, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   fdead: {fileID: -528339359, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   bdead: {fileID: -869813512, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
-  ldead: {fileID: 0}
-  rdead: {fileID: 0}
+  ldead: {fileID: -1571081483, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
+  rdead: {fileID: -417137675, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   fangry: {fileID: -74109664, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   bangry: {fileID: -1950326286, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
-  langry: {fileID: 0}
-  rangry: {fileID: 0}
+  langry: {fileID: 887415845, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
+  rangry: {fileID: 371030718, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   interacting: 0
   speed: 5
 --- !u!212 &1614561974

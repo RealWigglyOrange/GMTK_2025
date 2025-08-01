@@ -8,12 +8,12 @@ public class DetectDeath : MonoBehaviour
     [SerializeField] private GameMode GM;
     [SerializeField] private Progress Progress;
 
-    private float localTimer = 30;
+    private float localTimer = 5;
 
     // Update is called once per frame
     void Update()
     {
-        if (GM.timer >= 180)
+        if (GM.timer >= 60)
         {
             if (player.spriteRenderer.sprite == player.fhappy || player.spriteRenderer.sprite == player.fangry)
             {
@@ -21,6 +21,12 @@ public class DetectDeath : MonoBehaviour
             } else if (player.spriteRenderer.sprite == player.bhappy || player.spriteRenderer.sprite == player.bangry)
             {
                 player.spriteRenderer.sprite = player.bdead;
+            } else if (player.spriteRenderer.sprite == player.lhappy || player.spriteRenderer.sprite == player.langry)
+            {
+                player.spriteRenderer.sprite = player.ldead;
+            } else if (player.spriteRenderer.sprite == player.rhappy || player.spriteRenderer.sprite == player.rangry)
+            {
+                player.spriteRenderer.sprite = player.rdead;
             }
 
             localTimer -= Time.deltaTime;
@@ -30,7 +36,7 @@ public class DetectDeath : MonoBehaviour
                 GM.timer = 0;
                 Progress.clear();
                 player.resetPlayer();
-                localTimer = 30;
+                localTimer = 5;
             }
         }
     }
