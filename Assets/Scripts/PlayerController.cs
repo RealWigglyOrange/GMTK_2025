@@ -5,12 +5,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
+
+    [Header("Sprites")]
     public Sprite fhappy;
     public Sprite bhappy;
+    public Sprite lhappy;
+    public Sprite rhappy;
     public Sprite fdead;
     public Sprite bdead;
+    public Sprite ldead;
+    public Sprite rdead;
     public Sprite fangry;
     public Sprite bangry;
+    public Sprite langry;
+    public Sprite rangry;
 
     private float Vin;
     private float Hin;
@@ -28,15 +36,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         GetInput();
-
-
-        if (Vin > 0)
-        {
-            spriteRenderer.sprite = bhappy;
-        } else if (Vin < 0)
-        {
-            spriteRenderer.sprite = fhappy;
-        }
+        UpdateSprite();
     }
 
     void FixedUpdate()
@@ -49,6 +49,26 @@ public class PlayerController : MonoBehaviour
         Vin = Input.GetAxis("Vertical");
         Hin = Input.GetAxis("Horizontal");
         interacting = Input.GetKey(KeyCode.F);
+    }
+
+    void UpdateSprite()
+    {
+        if (Vin > 0)
+        {
+            spriteRenderer.sprite = bhappy;
+        }
+        else if (Vin < 0)
+        {
+            spriteRenderer.sprite = fhappy;
+        }
+        else if (Hin > 0)
+        {
+            spriteRenderer.sprite = rhappy;
+        }
+        else if (Hin < 0)
+        {
+            spriteRenderer.sprite = lhappy;
+        }
     }
 
     void Movement(float t)
