@@ -7,6 +7,7 @@ public class DetectDeath : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private GameMode GM;
     [SerializeField] private Progress Progress;
+    [SerializeField] private AudioSource deathSFX;
 
     private float localTimer = 5;
     public bool isdead = false;
@@ -23,6 +24,10 @@ public class DetectDeath : MonoBehaviour
     void killPlayer()
     {
         isdead = true;
+        if (localTimer == 5)
+        {
+            deathSFX.Play();
+        }
 
         if (player.spriteRenderer.sprite == player.fhappy || player.spriteRenderer.sprite == player.fangry)
         {
