@@ -1,13 +1,36 @@
 using System.Collections.Generic;
 using TMPro;
+using System.IO;
 using UnityEngine;
 
 public class Computer : MonoBehaviour, IInteractable
 {
     public InteractionTree interactionTree;
     public GameObject back;
+    public TextAsset textAsset;
+
     public void interact()
     {
+        interactionTree = new InteractionTree();
+        interactionTree.dialogues = new List<Dialogue>();
+        Dialogue dialogue1 = new Dialogue("...", 1);
+
+        Dialogue dialogue2;
+
+        string filepath = Application.dataPath + "/Scripts/hasPCpass.txt";
+        Debug.Log(textAsset.text);
+        if (textAsset.text == "true")
+        {
+            dialogue2 = new Dialogue("You remembered your password", new Option("gmtkJameJam2025", -1));
+        }
+        else
+        {
+            dialogue2 = new Dialogue("You forgot your password");
+        }
+
+        interactionTree.dialogues.Add(dialogue1);
+        interactionTree.dialogues.Add(dialogue2);
+
         UserInterface.instance.show(interactionTree);
     }
     public void triggerInteract()
@@ -16,24 +39,7 @@ public class Computer : MonoBehaviour, IInteractable
     }
     void Start()
     {
-        interactionTree = new InteractionTree();
-        interactionTree.dialogues = new List<Dialogue>();
-        Dialogue dialogue1 = new Dialogue("This is text", 1);
-
-        Dialogue dialogue2 = new Dialogue("This is the next text", 2);
-
-        Dialogue dialogue3 = new Dialogue("This is text with options", new Option("Red Pill", 3), new Option("Blue Pill", 4), new Option("Back", 1));
-
-        Dialogue dialogue4 = new Dialogue("You took the red pill");
-
-        Dialogue dialogue5 = new Dialogue("You took the blue pill");
-
-
-        interactionTree.dialogues.Add(dialogue1);
-        interactionTree.dialogues.Add(dialogue2);
-        interactionTree.dialogues.Add(dialogue3);
-        interactionTree.dialogues.Add(dialogue4);
-        interactionTree.dialogues.Add(dialogue5);
+        
     }
 
 }

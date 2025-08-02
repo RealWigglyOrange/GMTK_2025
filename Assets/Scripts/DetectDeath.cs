@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DetectDeath : MonoBehaviour
 {
@@ -50,12 +51,15 @@ public class DetectDeath : MonoBehaviour
 
         if (localTimer <= 0)
         {
+            SceneManager.LoadScene("SampleScene");
+            /*
             GM.timer = 0;
             Progress.clear();
             player.resetPlayer();
             localTimer = 5;
             isdead = false;
             player.transform.position = new Vector3(0.0f, 0.0f);
+            */
         }
     }
 }

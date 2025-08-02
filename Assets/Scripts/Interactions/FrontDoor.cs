@@ -23,7 +23,7 @@ public class FrontDoor : MonoBehaviour, IInteractable
 
         Dialogue dialogue2 = new Dialogue("gmtkJameJam2025");
         // write to hasPCpass.txt
-        string filepath = Application.dataPath + "/Assets/Scripts/hasPCpass.txt";
+        string filepath = Application.dataPath + "/Scripts/hasPCpass.txt";
         File.WriteAllText(filepath, "true");
 
         interactionTree.dialogues.Add(dialogue1);
