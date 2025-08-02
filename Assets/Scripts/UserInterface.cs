@@ -41,14 +41,22 @@ public class UserInterface : MonoBehaviour
     {
         updateClock();
         fastForward.SetActive(player.fastForwarding);
-        
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            optionSelectionIndex = optionSelectionIndex - 1 % optionAmount;
+            if (optionAmount != 0)
+                optionSelectionIndex = optionSelectionIndex - 1;
+            if (optionSelectionIndex < 0)
+                optionSelectionIndex = optionAmount-1;
+            Debug.Log(optionAmount);
+            Debug.Log("selection index: " + optionSelectionIndex);
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            optionSelectionIndex = optionSelectionIndex + 1 % optionAmount;
+            if (optionAmount != 0)
+                optionSelectionIndex = (optionSelectionIndex + 1) % optionAmount;
+            Debug.Log(optionAmount);
+            Debug.Log("selection index: " + optionSelectionIndex);
         }
 
         updateOptions();
@@ -158,7 +166,7 @@ public class UserInterface : MonoBehaviour
 
     public void exitInteraction()
     {
-        hide();
+        hidePanel();
         hideOptions();
         player.interacting = false;
         currentInteractionIndex = 0;
@@ -183,7 +191,7 @@ public class UserInterface : MonoBehaviour
         options.SetActive(false);
     }
 
-    public void hide()
+    public void hidePanel()
     {
         panel.SetActive(false);
     }
