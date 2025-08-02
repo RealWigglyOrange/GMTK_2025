@@ -6,6 +6,7 @@ public class Progress : MonoBehaviour
 {
     // All the variables to hold the players progess in puzzles
     public bool bookshelf;
+    public bool hasBoards;
     public bool boardedWindows;
     public bool safeOpened;
     public bool doorLocked;
