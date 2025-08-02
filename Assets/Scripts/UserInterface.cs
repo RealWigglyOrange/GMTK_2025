@@ -138,14 +138,14 @@ public class UserInterface : MonoBehaviour
 
     void optionSelection()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             if (optionAmount != 0)
                 optionSelectionIndex = optionSelectionIndex - 1;
             if (optionSelectionIndex < 0)
                 optionSelectionIndex = optionAmount-1;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
             if (optionAmount != 0)
                 optionSelectionIndex = (optionSelectionIndex + 1) % optionAmount;
