@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InteractionTree
@@ -8,22 +9,34 @@ public class InteractionTree
     public List<Dialogue> dialogues;
 }
 
-public enum DialogueType
+public class Option
 {
-    NoOptions, TwoOptions, ThreeOptions
+    public string text;
+    public GameObject script;
+
+    public Option(string text, GameObject script)
+    {
+        this.text = text;
+        this.script = script;
+    }
+
+    public Option(string text)
+    {
+        this.text = text;
+    }
 }
 
 [Serializable]
 public class Dialogue
 {
-    [field: SerializeField] public DialogueType type;
-    [field: SerializeField] public string text;
-    [field: SerializeField] public string optionOneText;
-    [field: SerializeField] public GameObject optionOneScript;
-    [field: SerializeField] public string optionTwoText;
-    [field: SerializeField] public GameObject optionTwoScript;
-    [field: SerializeField] public string optionThreeText;
-    [field: SerializeField] public GameObject optionThreeScript;
+    public string text;
+    public List<Option> options;
 
-    [field: SerializeField] public int nextIndex;
+    public int nextIndex;
+
+    public Dialogue(string text, params Option[] options)
+    {
+        this.text = text;
+        this.options = options.ToList();
+    }
 }
