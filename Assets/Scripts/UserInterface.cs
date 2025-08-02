@@ -23,10 +23,9 @@ public class UserInterface : MonoBehaviour
 
     InteractionTree activeInteractionTree;
     [NonSerialized]
-    int currentInteractionIndex = 0;
+    int currentInteractionIndex = -1;
     int optionSelectionIndex = 0;
     int optionAmount = 0;
-    IEnumerator<Dialogue> enumerator;
 
     public void Awake()
     {
@@ -45,81 +44,97 @@ public class UserInterface : MonoBehaviour
 
         updateOptions();
 
-        if (Input.GetKeyDown(KeyCode.F))
+        updateDialogue();
+    }
+
+    void updateDialogue()
+    {
+        Dialogue dialogue = null;
+        if (activeInteractionTree != null)
         {
-            // Debug.Log($"Before: {currentInteractionIndex}");
-
-            Dialogue dialogue = activeInteractionTree.dialogues[currentInteractionIndex];
-            if (dialogue.options.Count != 0)
+            if (currentInteractionIndex == -1)
             {
-                dialogue.options[optionSelectionIndex].script?.GetComponent<IOption>().execute();
-            }
-
-            displayDialogue(dialogue);
-
-            //If there are more dialogues
-            if (enumerator.MoveNext())
-            {
-                //Clamp from 0 to max dialogue amount (minus one for array)
-                //Sorry y'all, I couldn't find a better fix than this crappy hack ;-;
-                currentInteractionIndex = (currentInteractionIndex + 1) % activeInteractionTree.dialogues.Count;
-                // Debug.Log(currentInteractionIndex);
+                dialogue = activeInteractionTree.dialogues[0];
             }
             else
             {
-                exitInteraction();
-                return;
+                dialogue = activeInteractionTree.dialogues[currentInteractionIndex];
             }
 
-            // Debug.Log($"After: {currentInteractionIndex}");
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                // Debug.Log($"Before: {currentInteractionIndex}");
+
+
+                if (dialogue.options.Count != 0)
+                {
+                    dialogue.options[optionSelectionIndex].script?.GetComponent<IOption>().execute();
+                    if (dialogue.options[optionSelectionIndex].nextIndex != null)
+                    {
+                        currentInteractionIndex = (int)dialogue.options[optionSelectionIndex].nextIndex;
+                    }
+                    else
+                    {
+                        nextDialogue(dialogue);
+                    }
+
+                }
+                else
+                {
+                    nextDialogue(dialogue);
+                }
+            }
         }
+        displayDialogue(dialogue);
     }
 
-    private IEnumerable<Dialogue> getNextDialogue(InteractionTree tree)
+    void nextDialogue(Dialogue dialogue)
     {
-        foreach (Dialogue dialogue in tree.dialogues)
+        if (dialogue.nextIndex == -1)
         {
-            // Debug.Log($"Fired");
-            yield return dialogue;
+            exitInteraction();
         }
-    }
-
-    public void nextDialogue()
-    {
-        if (enumerator.MoveNext())
+        else if (currentInteractionIndex != -1)
         {
-            currentInteractionIndex++;
-            displayDialogue(enumerator.Current);
+            currentInteractionIndex = dialogue.nextIndex;
         }
         else
         {
-            exitInteraction();
-            return;
+            currentInteractionIndex = 0;
         }
-
     }
 
     void displayDialogue(Dialogue dialogue)
     {
-        optionAmount = dialogue.options.Count;
-        switch (optionAmount)
+        if (dialogue != null)
         {
-            case 0:
-                dialogueText.text = dialogue.text;
-                break;
-            case 3:
-                showOptions();
-                optionsText[0].text = dialogue.options[0].text;
-                optionsText[1].text = dialogue.options[1].text;
-                optionsText[2].text = dialogue.options[2].text;
-                break;
+            optionAmount = dialogue.options.Count;
+            switch (optionAmount)
+            {
+                case 0:
+                    dialogueText.text = dialogue.text;
+                    hideOptions();
+                    break;
+                case 3:
+                    dialogueText.text = dialogue.text;
+                    showOptions();
+                    optionsText[0].text = dialogue.options[0].text;
+                    optionsText[1].text = dialogue.options[1].text;
+                    optionsText[2].text = dialogue.options[2].text;
+                    break;
+            }
+        }
+        else
+        {
+            hidePanel();
+            hideOptions();
         }
     }
 
-    public void previousDialogue()
-    {
-        displayDialogue(activeInteractionTree.dialogues[--currentInteractionIndex]);
-    }
+    // public void previousDialogue()
+    // {
+    //     displayDialogue(activeInteractionTree.dialogues[--currentInteractionIndex]);
+    // }
 
     void optionSelection()
     {
@@ -166,19 +181,20 @@ public class UserInterface : MonoBehaviour
 
     public void exitInteraction()
     {
+        Debug.Log("exited");
         hidePanel();
         hideOptions();
         player.interacting = false;
-        currentInteractionIndex = 0;
+        currentInteractionIndex = -1;
+        activeInteractionTree = null;
+        optionAmount = 0;
     }
 
     public void show(InteractionTree interactionTree)
     {
         player.interacting = true;
         dialoguePanel.SetActive(true);
-        dialogueText.text = interactionTree.dialogues[0].text;
         activeInteractionTree = interactionTree;
-        enumerator = getNextDialogue(activeInteractionTree).GetEnumerator();
     }
 
     public void showOptions()

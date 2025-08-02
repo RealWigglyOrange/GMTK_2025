@@ -12,7 +12,14 @@ public class InteractionTree
 public class Option
 {
     public string text;
+    public int? nextIndex;
     public GameObject script;
+
+    public Option(string text, int nextIndex)
+    {
+        this.text = text;
+        this.nextIndex = nextIndex;
+    }
 
     public Option(string text, GameObject script)
     {
@@ -34,9 +41,10 @@ public class Dialogue
 
     public int nextIndex;
 
-    public Dialogue(string text, params Option[] options)
+    public Dialogue(string text, int nextIndex, params Option[] options)
     {
         this.text = text;
+        this.nextIndex = nextIndex;
         this.options = options.ToList();
     }
 }
