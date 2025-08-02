@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
                     castDirection = Vector2.left;
                     break;
             }
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, castDirection, 1.0f);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, castDirection, 1.5f);
             if (hit)
             {
                 if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable))

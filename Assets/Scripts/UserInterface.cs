@@ -65,8 +65,9 @@ public class UserInterface : MonoBehaviour
             {
                 if (dialogue.options.Count != 0)
                 {
-                    Debug.Log(currentInteractionIndex);
-                    dialogue.options[optionSelectionIndex].script?.GetComponent<IOption>().execute();
+                    // Debug.Log(currentInteractionIndex);
+                    if (currentInteractionIndex != -1)
+                        dialogue.options[optionSelectionIndex].script?.GetComponent<IOption>().execute();
                     if (dialogue.options[optionSelectionIndex].nextIndex != null && currentInteractionIndex != -1)
                     {
                         int next = (int)dialogue.options[optionSelectionIndex].nextIndex;
@@ -182,7 +183,7 @@ public class UserInterface : MonoBehaviour
 
     public void exitInteraction()
     {
-        Debug.Log("exited");
+        // Debug.Log("exited");
         hidePanel();
         hideOptions();
         player.interacting = false;
