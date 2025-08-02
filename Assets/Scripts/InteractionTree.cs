@@ -7,6 +7,10 @@ using UnityEngine;
 public class InteractionTree
 {
     public List<Dialogue> dialogues;
+    public InteractionTree()
+    {
+        this.dialogues = new List<Dialogue>();
+    }
 }
 
 public class Option
@@ -15,7 +19,7 @@ public class Option
     public int? nextIndex;
     public GameObject script;
 
-    public Option(string text, int nextIndex)
+    public Option(string text, int nextIndex = -1)
     {
         this.text = text;
         this.nextIndex = nextIndex;
@@ -45,6 +49,13 @@ public class Dialogue
     {
         this.text = text;
         this.nextIndex = nextIndex;
+        this.options = options.ToList();
+    }
+
+    public Dialogue(string text, params Option[] options)
+    {
+        this.text = text;
+        this.nextIndex = -1;
         this.options = options.ToList();
     }
 }

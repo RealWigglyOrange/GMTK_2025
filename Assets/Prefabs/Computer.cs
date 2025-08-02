@@ -10,10 +10,14 @@ public class Computer : MonoBehaviour, IInteractable
     {
         UserInterface.instance.show(interactionTree);
     }
+    //Without this, the interface gets pissy
+    public void triggerInteract()
+    {
+        
+    }
     void Start()
     {
         interactionTree = new InteractionTree();
-        interactionTree.dialogues = new List<Dialogue>();
         Dialogue dialogue1 = new Dialogue("This is text", 1);
 
         Dialogue dialogue2 = new Dialogue("This is the next text", 2);
@@ -31,5 +35,4 @@ public class Computer : MonoBehaviour, IInteractable
         interactionTree.dialogues.Add(dialogue4);
         interactionTree.dialogues.Add(dialogue5);
     }
-
 }
