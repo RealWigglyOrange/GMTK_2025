@@ -12,17 +12,20 @@ public class Progress : MonoBehaviour
     public bool doorLocked;
     public bool bedroomOpened;
     public bool hasLamp;
+    public bool thrownLamp;
     public bool underBed;
 
     // Clears the player's progress when they die
     public void clear()
     {
         bookshelf = false;
+        hasBoards = false;
         boardedWindows = false;
         safeOpened = false;
         doorLocked = false;
         bedroomOpened = false;
         hasLamp = false;
+        thrownLamp = false;
         underBed = false;
     }
 }

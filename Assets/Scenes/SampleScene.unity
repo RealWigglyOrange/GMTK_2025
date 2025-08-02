@@ -2839,6 +2839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GM: {fileID: 1612959368}
   progress: {fileID: 710229538}
+  openDoorScript: {fileID: 1817543152}
 --- !u!1 &648058982 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6330160478417094169, guid: c7de0a397adc852e894e8e5a6bbf381e, type: 3}
@@ -2972,6 +2973,7 @@ MonoBehaviour:
   doorLocked: 0
   bedroomOpened: 0
   hasLamp: 0
+  thrownLamp: 0
   underBed: 0
 --- !u!4 &710229539
 Transform:

@@ -30,7 +30,7 @@ public class DetectDeath : MonoBehaviour
         }
     }
 
-    void killPlayer()
+    public void killPlayer()
     {
         if (!Progress.bookshelf && !Progress.doorLocked)
         {
