@@ -36,13 +36,7 @@ public class UserInterface : MonoBehaviour
     void Update()
     {
         updateClock();
-        if (player.fastForwarding)
-        {
-            fastForward.SetActive(true);
-        } else
-        {
-            fastForward.SetActive(false);
-        }
+        fastForward.SetActive(player.fastForwarding);
         
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
