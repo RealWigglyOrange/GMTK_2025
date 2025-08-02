@@ -73,14 +73,7 @@ public class PlayerController : MonoBehaviour
         Vin = Input.GetAxis("Vertical");
         Hin = Input.GetAxis("Horizontal");
         tryInteract = Input.GetKeyDown(KeyCode.F);
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            fastForwarding = true;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            fastForwarding = false;
-        }
+        fastForwarding = Input.GetKeyDown(KeyCode.LeftShift);
     }
 
     void UpdateSprite()
@@ -145,7 +138,6 @@ public class PlayerController : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, castDirection, 1.0f);
             if (hit)
             {
-                // Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable))
                 {
                     interactable.interact();

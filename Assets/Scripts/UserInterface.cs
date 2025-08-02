@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -21,9 +23,11 @@ public class UserInterface : MonoBehaviour
     public PlayerController player;
     public TextMeshProUGUI uiText;
     InteractionTree activeInteractionTree;
+    [NonSerialized]
     public int currentInteractionIndex = 0;
     int optionSelectionIndex = 0;
     int optionAmount = 0;
+    IEnumerator<Dialogue> enumerator;
 
     public void Awake()
     {
@@ -36,98 +40,97 @@ public class UserInterface : MonoBehaviour
     void Update()
     {
         updateClock();
-        if (player.fastForwarding)
-        {
-            fastForward.SetActive(true);
-        } else
-        {
-            fastForward.SetActive(false);
-        }
+        fastForward.SetActive(player.fastForwarding);
         
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            optionSelectionIndex--;
+            optionSelectionIndex = optionSelectionIndex - 1 % optionAmount;
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            optionSelectionIndex++;
+            optionSelectionIndex = optionSelectionIndex + 1 % optionAmount;
         }
 
         updateOptions();
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.F))
         {
+            Debug.Log($"Before: {currentInteractionIndex}");
+
             Dialogue dialogue = activeInteractionTree.dialogues[currentInteractionIndex];
-            if (dialogue.type == DialogueType.ThreeOptions || dialogue.type == DialogueType.TwoOptions)
+            if (dialogue.options.Count != 0)
             {
-                switch (optionSelectionIndex)
-                {
-                    case 0:
-                        if (dialogue.optionOneScript)
-                        dialogue.optionOneScript.GetComponent<IOption>().execute();
-                        break;
-                    case 1:
-                        if (dialogue.optionTwoScript)
-                        dialogue.optionTwoScript.GetComponent<IOption>().execute();
-                        break;
-                    case 2:
-                        if (dialogue.optionThreeScript)
-                        dialogue.optionThreeScript.GetComponent<IOption>().execute();
-                        break;
-                }
+                dialogue.options[optionSelectionIndex].script?.GetComponent<IOption>().execute();
             }
 
-            nextDialogue();
+            displayDialogue(dialogue);
+
+            //If there are more dialogues
+            if (enumerator.MoveNext())
+            {
+                //Clamp from 0 to max dialogue amount (minus one for array)
+                //Sorry y'all, I couldn't find a better fix than this crappy hack ;-;
+                currentInteractionIndex = (currentInteractionIndex + 1) % activeInteractionTree.dialogues.Count;
+                Debug.Log(currentInteractionIndex);
+            }
+            else
+            {
+                exitInteraction();
+                return;
+            }
+
+            Debug.Log($"After: {currentInteractionIndex}");
+        }
+    }
+
+    private IEnumerable<Dialogue> getNextDialogue(InteractionTree tree)
+    {
+        foreach (Dialogue dialogue in tree.dialogues)
+        {
+            Debug.Log($"Fired");
+            yield return dialogue;
         }
     }
 
     public void nextDialogue()
     {
-        int nextIndex = activeInteractionTree.dialogues[currentInteractionIndex].nextIndex;
-        if (nextIndex == -1)
+        if (enumerator.MoveNext())
+        {
+            currentInteractionIndex++;
+            displayDialogue(enumerator.Current);
+        }
+        else
         {
             exitInteraction();
             return;
         }
-        currentInteractionIndex = activeInteractionTree.dialogues[currentInteractionIndex].nextIndex;
-        Dialogue dialogue = activeInteractionTree.dialogues[currentInteractionIndex];
-
-        displayDialogue(dialogue);
 
     }
 
     void displayDialogue(Dialogue dialogue)
     {
-        switch (dialogue.type)
+        optionAmount = dialogue.options.Count;
+        switch (optionAmount)
         {
-            case DialogueType.NoOptions:
+            case 0:
                 uiText.text = dialogue.text;
-                optionAmount = 0;
                 break;
-            case DialogueType.ThreeOptions:
+            case 3:
                 showOptions();
-                optionOneText.text = dialogue.optionOneText;
-                optionTwoText.text = dialogue.optionTwoText;
-                optionThreeText.text = dialogue.optionThreeText;
-                optionAmount = 3;
+                optionOneText.text = dialogue.options[0].text;
+                optionTwoText.text = dialogue.options[1].text;
+                optionThreeText.text = dialogue.options[2].text;
                 break;
         }
     }
 
-    public void perviousDialogue()
+    public void previousDialogue()
     {
-        currentInteractionIndex--;
-        Dialogue dialogue = activeInteractionTree.dialogues[currentInteractionIndex];
-        displayDialogue(dialogue);
+        displayDialogue(activeInteractionTree.dialogues[--currentInteractionIndex]);
     }
 
     public void updateOptions()
     {
-        if (optionSelectionIndex > optionAmount || optionSelectionIndex < 0)
-        {
-            optionSelectionIndex = optionAmount;
-        }
-
         if (optionAmount == 0)
         {
             hideOptions();
@@ -167,6 +170,7 @@ public class UserInterface : MonoBehaviour
         panel.SetActive(true);
         uiText.text = interactionTree.dialogues[0].text;
         activeInteractionTree = interactionTree;
+        enumerator = getNextDialogue(activeInteractionTree).GetEnumerator();
     }
 
     public void showOptions()
