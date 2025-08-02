@@ -16,19 +16,23 @@ public class Computer : MonoBehaviour, IInteractable
         Dialogue dialogue1 = new Dialogue("...", 1);
 
         Dialogue dialogue2;
+        Dialogue dialogue3;
 
         if (PermenantProgress.hasPCpass)
         {
-            Debug.Log("has pc pass");
-            dialogue2 = new Dialogue("You remembered your password", new Option("gmtkJameJam2025", -1));
+            dialogue2 = new Dialogue("You remembered your password", new Option("gmtkJameJam2025", 2));
+            dialogue3 = new Dialogue("Safe Password: 23 41 6");
+            PermenantProgress.hasSafepass = true;
         }
         else
         {
             dialogue2 = new Dialogue("You forgot your password");
+            dialogue3 = new Dialogue("...");
         }
 
         interactionTree.dialogues.Add(dialogue1);
         interactionTree.dialogues.Add(dialogue2);
+        interactionTree.dialogues.Add(dialogue3);
 
         UserInterface.instance.show(interactionTree);
     }
