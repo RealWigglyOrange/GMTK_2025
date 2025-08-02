@@ -69,7 +69,15 @@ public class UserInterface : MonoBehaviour
                     dialogue.options[optionSelectionIndex].script?.GetComponent<IOption>().execute();
                     if (dialogue.options[optionSelectionIndex].nextIndex != null && currentInteractionIndex != -1)
                     {
-                        currentInteractionIndex = (int)dialogue.options[optionSelectionIndex].nextIndex;
+                        int next = (int)dialogue.options[optionSelectionIndex].nextIndex;
+                        if (next == -1)
+                        {
+                            exitInteraction();
+                        }
+                        else
+                        {
+                        currentInteractionIndex = next;
+                        }
                     }
                     else
                     {
