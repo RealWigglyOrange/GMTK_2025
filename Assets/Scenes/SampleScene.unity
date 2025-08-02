@@ -2877,6 +2877,8 @@ MonoBehaviour:
   GM: {fileID: 1612959368}
   Progress: {fileID: 710229538}
   deathSFX: {fileID: 852851306}
+  doorSpriteRenderer: {fileID: 1816620917}
+  openDoor: {fileID: 21300000, guid: 354e30bf7fee8eeb5a107a818c860e85, type: 3}
   isdead: 0
 --- !u!4 &827756246
 Transform:
@@ -6238,6 +6240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1614561973}
+  knockSFX: {fileID: 1525553692}
   timer: 0
   minutes: 0
 --- !u!4 &1612959369
@@ -7282,6 +7285,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progress: {fileID: 710229538}
+--- !u!212 &1816620917 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8225609664763563661, guid: 7310c5a87b403f864a30efdee4e37eda, type: 3}
+  m_PrefabInstance: {fileID: 5759906897175746386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1820756728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8060429518959442298, guid: 02a4dda6dac70777c86429133faf6607, type: 3}

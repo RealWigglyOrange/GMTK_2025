@@ -9,6 +9,8 @@ public class DetectDeath : MonoBehaviour
     [SerializeField] private GameMode GM;
     [SerializeField] private Progress Progress;
     [SerializeField] private AudioSource deathSFX;
+    [SerializeField] private SpriteRenderer doorSpriteRenderer;
+    [SerializeField] private Sprite openDoor;
 
     private float localTimer = 5;
     public bool isdead = false;
@@ -19,11 +21,22 @@ public class DetectDeath : MonoBehaviour
         if (GM.timer >= 60)
         {
             killPlayer();
+        } else if (GM.timer >= 30 && (!Progress.boardedWindows ^ !Progress.bookshelf))
+        {
+            killPlayer();
+        } else if (GM.timer >= 15 && !Progress.bookshelf && !Progress.boardedWindows)
+        {
+            killPlayer();
         }
     }
 
     void killPlayer()
     {
+        if (!Progress.bookshelf && !Progress.doorLocked)
+        {
+            doorSpriteRenderer.sprite = openDoor;
+        }
+
         isdead = true;
         if (localTimer == 5)
         {
