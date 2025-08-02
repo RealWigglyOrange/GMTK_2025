@@ -73,7 +73,15 @@ public class PlayerController : MonoBehaviour
         Vin = Input.GetAxis("Vertical");
         Hin = Input.GetAxis("Horizontal");
         tryInteract = Input.GetKeyDown(KeyCode.F);
-        fastForwarding = Input.GetKeyDown(KeyCode.LeftShift);
+        // FOR THE LOVE OF GOD DON'T CHANGE HOW THIS CODE WORKS
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            fastForwarding = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            fastForwarding = false;
+        }
     }
 
     void UpdateSprite()
