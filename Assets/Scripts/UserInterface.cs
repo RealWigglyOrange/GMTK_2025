@@ -6,25 +6,24 @@ using UnityEngine;
 
 public class UserInterface : MonoBehaviour
 {
-    [SerializeField] private GameMode GM;
-
     public static UserInterface instance;
-    public GameObject canvas;
-    public GameObject panel;
-    public GameObject fastForward;
-    public TextMeshProUGUI timeText;
-    public GameObject options;
-    public TextMeshProUGUI optionOneText;
-    public TextMeshProUGUI optionTwoText;
-    public TextMeshProUGUI optionThreeText;
-    public GameObject optionOneIndicator;
-    public GameObject optionTwoIndicator;
-    public GameObject optionThreeIndicator;
-    public PlayerController player;
-    public TextMeshProUGUI uiText;
+
+    [SerializeField] GameMode GM;
+    [SerializeField] PlayerController player;
+
+    [Header("UI Assets")]
+    [SerializeField] GameObject canvas;
+    [SerializeField] GameObject dialoguePanel;
+    [SerializeField] TextMeshProUGUI dialogueText;
+    [SerializeField] GameObject optionsPanel;
+    [SerializeField] TextMeshProUGUI[] optionsText;
+    [SerializeField] GameObject[] optionIndicators;
+    [SerializeField] GameObject fastForward;
+    [SerializeField] TextMeshProUGUI timeText;
+
     InteractionTree activeInteractionTree;
     [NonSerialized]
-    public int currentInteractionIndex = 0;
+    int currentInteractionIndex = 0;
     int optionSelectionIndex = 0;
     int optionAmount = 0;
     IEnumerator<Dialogue> enumerator;
@@ -32,9 +31,9 @@ public class UserInterface : MonoBehaviour
     public void Awake()
     {
         instance = this;
-        panel.SetActive(false);
+        dialoguePanel.SetActive(false);
         fastForward.SetActive(false);
-        options.SetActive(false);
+        optionsPanel.SetActive(false);
     }
 
     void Update()
@@ -42,28 +41,13 @@ public class UserInterface : MonoBehaviour
         updateClock();
         fastForward.SetActive(player.fastForwarding);
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (optionAmount != 0)
-                optionSelectionIndex = optionSelectionIndex - 1;
-            if (optionSelectionIndex < 0)
-                optionSelectionIndex = optionAmount-1;
-            Debug.Log(optionAmount);
-            Debug.Log("selection index: " + optionSelectionIndex);
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (optionAmount != 0)
-                optionSelectionIndex = (optionSelectionIndex + 1) % optionAmount;
-            Debug.Log(optionAmount);
-            Debug.Log("selection index: " + optionSelectionIndex);
-        }
+        optionSelection();
 
         updateOptions();
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log($"Before: {currentInteractionIndex}");
+            // Debug.Log($"Before: {currentInteractionIndex}");
 
             Dialogue dialogue = activeInteractionTree.dialogues[currentInteractionIndex];
             if (dialogue.options.Count != 0)
@@ -79,7 +63,7 @@ public class UserInterface : MonoBehaviour
                 //Clamp from 0 to max dialogue amount (minus one for array)
                 //Sorry y'all, I couldn't find a better fix than this crappy hack ;-;
                 currentInteractionIndex = (currentInteractionIndex + 1) % activeInteractionTree.dialogues.Count;
-                Debug.Log(currentInteractionIndex);
+                // Debug.Log(currentInteractionIndex);
             }
             else
             {
@@ -87,7 +71,7 @@ public class UserInterface : MonoBehaviour
                 return;
             }
 
-            Debug.Log($"After: {currentInteractionIndex}");
+            // Debug.Log($"After: {currentInteractionIndex}");
         }
     }
 
@@ -95,7 +79,7 @@ public class UserInterface : MonoBehaviour
     {
         foreach (Dialogue dialogue in tree.dialogues)
         {
-            Debug.Log($"Fired");
+            // Debug.Log($"Fired");
             yield return dialogue;
         }
     }
@@ -121,13 +105,13 @@ public class UserInterface : MonoBehaviour
         switch (optionAmount)
         {
             case 0:
-                uiText.text = dialogue.text;
+                dialogueText.text = dialogue.text;
                 break;
             case 3:
                 showOptions();
-                optionOneText.text = dialogue.options[0].text;
-                optionTwoText.text = dialogue.options[1].text;
-                optionThreeText.text = dialogue.options[2].text;
+                optionsText[0].text = dialogue.options[0].text;
+                optionsText[1].text = dialogue.options[1].text;
+                optionsText[2].text = dialogue.options[2].text;
                 break;
         }
     }
@@ -135,6 +119,22 @@ public class UserInterface : MonoBehaviour
     public void previousDialogue()
     {
         displayDialogue(activeInteractionTree.dialogues[--currentInteractionIndex]);
+    }
+
+    void optionSelection()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (optionAmount != 0)
+                optionSelectionIndex = optionSelectionIndex - 1;
+            if (optionSelectionIndex < 0)
+                optionSelectionIndex = optionAmount-1;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (optionAmount != 0)
+                optionSelectionIndex = (optionSelectionIndex + 1) % optionAmount;
+        }
     }
 
     public void updateOptions()
@@ -147,19 +147,19 @@ public class UserInterface : MonoBehaviour
         switch (optionSelectionIndex)
         {
             case 0:
-                optionOneIndicator.SetActive(true);
-                optionTwoIndicator.SetActive(false);
-                optionThreeIndicator.SetActive(false);
+                optionIndicators[0].SetActive(true);
+                optionIndicators[1].SetActive(false);
+                optionIndicators[2].SetActive(false);
                 break;
             case 1:
-                optionOneIndicator.SetActive(false);
-                optionTwoIndicator.SetActive(true);
-                optionThreeIndicator.SetActive(false);
+                optionIndicators[0].SetActive(false);
+                optionIndicators[1].SetActive(true);
+                optionIndicators[2].SetActive(false);
                 break;
             case 2:
-                optionOneIndicator.SetActive(false);
-                optionTwoIndicator.SetActive(false);
-                optionThreeIndicator.SetActive(true);
+                optionIndicators[0].SetActive(false);
+                optionIndicators[1].SetActive(false);
+                optionIndicators[2].SetActive(true);
                 break;
         }
     }
@@ -175,25 +175,25 @@ public class UserInterface : MonoBehaviour
     public void show(InteractionTree interactionTree)
     {
         player.interacting = true;
-        panel.SetActive(true);
-        uiText.text = interactionTree.dialogues[0].text;
+        dialoguePanel.SetActive(true);
+        dialogueText.text = interactionTree.dialogues[0].text;
         activeInteractionTree = interactionTree;
         enumerator = getNextDialogue(activeInteractionTree).GetEnumerator();
     }
 
     public void showOptions()
     {
-        options.SetActive(true);
+        optionsPanel.SetActive(true);
     }
 
     public void hideOptions()
     {
-        options.SetActive(false);
+        optionsPanel.SetActive(false);
     }
 
     public void hidePanel()
     {
-        panel.SetActive(false);
+        dialoguePanel.SetActive(false);
     }
 
     void updateClock()

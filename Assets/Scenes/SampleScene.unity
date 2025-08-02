@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 118640217}
   - component: {fileID: 118640216}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: OptionIndicator 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1015,7 +1015,7 @@ GameObject:
   - component: {fileID: 185357258}
   - component: {fileID: 185357257}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Option 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3632,7 +3632,7 @@ GameObject:
   - component: {fileID: 1080136443}
   - component: {fileID: 1080136442}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Option 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5218,7 +5218,7 @@ GameObject:
   - component: {fileID: 1430810712}
   - component: {fileID: 1430810711}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Option 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5446,7 +5446,7 @@ GameObject:
   - component: {fileID: 1603861255}
   - component: {fileID: 1603861254}
   m_Layer: 5
-  m_Name: Image
+  m_Name: OptionIndicator 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6507,19 +6507,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GM: {fileID: 1612959368}
+  player: {fileID: 1614561973}
   canvas: {fileID: 1815019975}
-  panel: {fileID: 246345658}
+  dialoguePanel: {fileID: 246345658}
+  dialogueText: {fileID: 178226297}
+  optionsPanel: {fileID: 73193128}
+  optionsText:
+  - {fileID: 185357257}
+  - {fileID: 1080136442}
+  - {fileID: 1430810711}
+  optionIndicators:
+  - {fileID: 1603861252}
+  - {fileID: 1851331174}
+  - {fileID: 118640214}
   fastForward: {fileID: 1070159221}
   timeText: {fileID: 2027926818}
-  options: {fileID: 73193128}
-  optionOneText: {fileID: 185357257}
-  optionTwoText: {fileID: 1080136442}
-  optionThreeText: {fileID: 1430810711}
-  optionOneIndicator: {fileID: 1603861252}
-  optionTwoIndicator: {fileID: 1851331174}
-  optionThreeIndicator: {fileID: 118640214}
-  player: {fileID: 1614561973}
-  uiText: {fileID: 178226297}
 --- !u!1 &1816620910
 GameObject:
   m_ObjectHideFlags: 0
@@ -6706,7 +6708,7 @@ GameObject:
   - component: {fileID: 1851331177}
   - component: {fileID: 1851331176}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: OptionIndicator 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
