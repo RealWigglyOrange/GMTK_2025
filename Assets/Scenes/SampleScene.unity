@@ -7974,7 +7974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64dd4619b91b074fbe7af0bfefb4b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: {fileID: 0}
+  progress: {fileID: 710229538}
 --- !u!50 &1970889867
 Rigidbody2D:
   serializedVersion: 5
