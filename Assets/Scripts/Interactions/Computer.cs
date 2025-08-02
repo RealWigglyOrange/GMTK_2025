@@ -17,10 +17,9 @@ public class Computer : MonoBehaviour, IInteractable
 
         Dialogue dialogue2;
 
-        string filepath = Application.dataPath + "/Scripts/hasPCpass.txt";
-        Debug.Log(textAsset.text);
-        if (textAsset.text == "true")
+        if (PermenantProgress.hasPCpass)
         {
+            Debug.Log("has pc pass");
             dialogue2 = new Dialogue("You remembered your password", new Option("gmtkJameJam2025", -1));
         }
         else
