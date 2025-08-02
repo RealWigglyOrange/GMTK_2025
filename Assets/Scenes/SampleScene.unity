@@ -1149,7 +1149,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1481095412213944540, guid: ce3e9e983a40a6145a52cb44052277ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.08
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1481095412213944540, guid: ce3e9e983a40a6145a52cb44052277ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5947,6 +5947,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1614561974}
   death: {fileID: 827756245}
+  progress: {fileID: 710229538}
+  cam: {fileID: 519420031}
   fhappy: {fileID: 2907207914147765162, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   bhappy: {fileID: 2145790084169322911, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
   lhappy: {fileID: 1741733234, guid: f8fa87b8444c93b4aa2eb7f905230275, type: 3}
