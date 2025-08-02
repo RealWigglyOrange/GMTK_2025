@@ -120,6 +120,7 @@ public class UserInterface : MonoBehaviour
                     showOptions();
                     optionsText[0].text = dialogue.options[0].text;
                     optionsText[1].text = dialogue.options[1].text;
+                    optionsText[2].text = "";
                     break;
                 case 3:
                     dialogueText.text = dialogue.text;
