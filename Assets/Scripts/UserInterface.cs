@@ -63,13 +63,11 @@ public class UserInterface : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                // Debug.Log($"Before: {currentInteractionIndex}");
-
-
                 if (dialogue.options.Count != 0)
                 {
+                    Debug.Log(currentInteractionIndex);
                     dialogue.options[optionSelectionIndex].script?.GetComponent<IOption>().execute();
-                    if (dialogue.options[optionSelectionIndex].nextIndex != null)
+                    if (dialogue.options[optionSelectionIndex].nextIndex != null && currentInteractionIndex != -1)
                     {
                         currentInteractionIndex = (int)dialogue.options[optionSelectionIndex].nextIndex;
                     }
@@ -90,17 +88,19 @@ public class UserInterface : MonoBehaviour
 
     void nextDialogue(Dialogue dialogue)
     {
-        if (dialogue.nextIndex == -1)
-        {
-            exitInteraction();
-        }
-        else if (currentInteractionIndex != -1)
+
+        if (currentInteractionIndex != -1)
         {
             currentInteractionIndex = dialogue.nextIndex;
         }
         else
         {
             currentInteractionIndex = 0;
+            return;
+        }
+        if (dialogue.nextIndex == -1)
+        {
+            exitInteraction();
         }
     }
 
@@ -114,6 +114,12 @@ public class UserInterface : MonoBehaviour
                 case 0:
                     dialogueText.text = dialogue.text;
                     hideOptions();
+                    break;
+                case 2:
+                    dialogueText.text = dialogue.text;
+                    showOptions();
+                    optionsText[0].text = dialogue.options[0].text;
+                    optionsText[1].text = dialogue.options[1].text;
                     break;
                 case 3:
                     dialogueText.text = dialogue.text;
@@ -138,14 +144,14 @@ public class UserInterface : MonoBehaviour
 
     void optionSelection()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (optionAmount != 0)
                 optionSelectionIndex = optionSelectionIndex - 1;
             if (optionSelectionIndex < 0)
                 optionSelectionIndex = optionAmount-1;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (optionAmount != 0)
                 optionSelectionIndex = (optionSelectionIndex + 1) % optionAmount;
@@ -159,24 +165,10 @@ public class UserInterface : MonoBehaviour
             hideOptions();
             return;
         }
-        switch (optionSelectionIndex)
-        {
-            case 0:
-                optionIndicators[0].SetActive(true);
-                optionIndicators[1].SetActive(false);
-                optionIndicators[2].SetActive(false);
-                break;
-            case 1:
-                optionIndicators[0].SetActive(false);
-                optionIndicators[1].SetActive(true);
-                optionIndicators[2].SetActive(false);
-                break;
-            case 2:
-                optionIndicators[0].SetActive(false);
-                optionIndicators[1].SetActive(false);
-                optionIndicators[2].SetActive(true);
-                break;
-        }
+        optionIndicators[0].SetActive(false);
+        optionIndicators[1].SetActive(false);
+        optionIndicators[2].SetActive(false);
+        optionIndicators[optionSelectionIndex].SetActive(true);
     }
 
     public void exitInteraction()
