@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Bookshelf : MonoBehaviour, IInteractable
 {
+    [SerializeField] private Progress progress;
+
     public void interact()
     {
         InteractionTree tree = new InteractionTree();
@@ -13,6 +15,6 @@ public class Bookshelf : MonoBehaviour, IInteractable
     }
     public void triggerInteract()
     {
-        Debug.Log("Pushed");
+        progress.bookshelf = true;
     }
 }
