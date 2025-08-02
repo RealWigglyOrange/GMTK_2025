@@ -1,133 +1,144 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
 public class UserInterface : MonoBehaviour
 {
-    [SerializeField] private GameMode GM;
-
     public static UserInterface instance;
-    public GameObject canvas;
-    public GameObject panel;
-    public GameObject fastForward;
-    public TextMeshProUGUI timeText;
-    public GameObject options;
-    public TextMeshProUGUI optionOneText;
-    public TextMeshProUGUI optionTwoText;
-    public TextMeshProUGUI optionThreeText;
-    public GameObject optionOneIndicator;
-    public GameObject optionTwoIndicator;
-    public GameObject optionThreeIndicator;
-    public PlayerController player;
-    public TextMeshProUGUI uiText;
+
+    [SerializeField] GameMode GM;
+    [SerializeField] PlayerController player;
+
+    [Header("UI Assets")]
+    [SerializeField] GameObject canvas;
+    [SerializeField] GameObject dialoguePanel;
+    [SerializeField] TextMeshProUGUI dialogueText;
+    [SerializeField] GameObject optionsPanel;
+    [SerializeField] TextMeshProUGUI[] optionsText;
+    [SerializeField] GameObject[] optionIndicators;
+    [SerializeField] GameObject fastForward;
+    [SerializeField] TextMeshProUGUI timeText;
+
     InteractionTree activeInteractionTree;
-    public int currentInteractionIndex = 0;
+    [NonSerialized]
+    int currentInteractionIndex = 0;
     int optionSelectionIndex = 0;
     int optionAmount = 0;
+    IEnumerator<Dialogue> enumerator;
 
     public void Awake()
     {
         instance = this;
-        panel.SetActive(false);
+        dialoguePanel.SetActive(false);
         fastForward.SetActive(false);
-        options.SetActive(false);
+        optionsPanel.SetActive(false);
     }
 
     void Update()
     {
         updateClock();
-        if (player.fastForwarding)
-        {
-            fastForward.SetActive(true);
-        } else
-        {
-            fastForward.SetActive(false);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            optionSelectionIndex--;
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            optionSelectionIndex++;
-        }
+        fastForward.SetActive(player.fastForwarding);
+
+        optionSelection();
 
         updateOptions();
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.F))
         {
+            // Debug.Log($"Before: {currentInteractionIndex}");
+
             Dialogue dialogue = activeInteractionTree.dialogues[currentInteractionIndex];
-            if (dialogue.type == DialogueType.ThreeOptions || dialogue.type == DialogueType.TwoOptions)
+            if (dialogue.options.Count != 0)
             {
-                switch (optionSelectionIndex)
-                {
-                    case 0:
-                        if (dialogue.optionOneScript)
-                        dialogue.optionOneScript.GetComponent<IOption>().execute();
-                        break;
-                    case 1:
-                        if (dialogue.optionTwoScript)
-                        dialogue.optionTwoScript.GetComponent<IOption>().execute();
-                        break;
-                    case 2:
-                        if (dialogue.optionThreeScript)
-                        dialogue.optionThreeScript.GetComponent<IOption>().execute();
-                        break;
-                }
+                dialogue.options[optionSelectionIndex].script?.GetComponent<IOption>().execute();
             }
 
-            nextDialogue();
+            displayDialogue(dialogue);
+
+            //If there are more dialogues
+            if (enumerator.MoveNext())
+            {
+                //Clamp from 0 to max dialogue amount (minus one for array)
+                //Sorry y'all, I couldn't find a better fix than this crappy hack ;-;
+                currentInteractionIndex = (currentInteractionIndex + 1) % activeInteractionTree.dialogues.Count;
+                // Debug.Log(currentInteractionIndex);
+            }
+            else
+            {
+                exitInteraction();
+                return;
+            }
+
+            // Debug.Log($"After: {currentInteractionIndex}");
+        }
+    }
+
+    private IEnumerable<Dialogue> getNextDialogue(InteractionTree tree)
+    {
+        foreach (Dialogue dialogue in tree.dialogues)
+        {
+            // Debug.Log($"Fired");
+            yield return dialogue;
         }
     }
 
     public void nextDialogue()
     {
-        int nextIndex = activeInteractionTree.dialogues[currentInteractionIndex].nextIndex;
-        if (nextIndex == -1)
+        if (enumerator.MoveNext())
+        {
+            currentInteractionIndex++;
+            displayDialogue(enumerator.Current);
+        }
+        else
         {
             exitInteraction();
             return;
         }
-        currentInteractionIndex = activeInteractionTree.dialogues[currentInteractionIndex].nextIndex;
-        Dialogue dialogue = activeInteractionTree.dialogues[currentInteractionIndex];
-
-        displayDialogue(dialogue);
 
     }
 
     void displayDialogue(Dialogue dialogue)
     {
-        switch (dialogue.type)
+        optionAmount = dialogue.options.Count;
+        switch (optionAmount)
         {
-            case DialogueType.NoOptions:
-                uiText.text = dialogue.text;
-                optionAmount = 0;
+            case 0:
+                dialogueText.text = dialogue.text;
                 break;
-            case DialogueType.ThreeOptions:
+            case 3:
                 showOptions();
-                optionOneText.text = dialogue.optionOneText;
-                optionTwoText.text = dialogue.optionTwoText;
-                optionThreeText.text = dialogue.optionThreeText;
-                optionAmount = 3;
+                optionsText[0].text = dialogue.options[0].text;
+                optionsText[1].text = dialogue.options[1].text;
+                optionsText[2].text = dialogue.options[2].text;
                 break;
         }
     }
 
-    public void perviousDialogue()
+    public void previousDialogue()
     {
-        currentInteractionIndex--;
-        Dialogue dialogue = activeInteractionTree.dialogues[currentInteractionIndex];
-        displayDialogue(dialogue);
+        displayDialogue(activeInteractionTree.dialogues[--currentInteractionIndex]);
+    }
+
+    void optionSelection()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (optionAmount != 0)
+                optionSelectionIndex = optionSelectionIndex - 1;
+            if (optionSelectionIndex < 0)
+                optionSelectionIndex = optionAmount-1;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (optionAmount != 0)
+                optionSelectionIndex = (optionSelectionIndex + 1) % optionAmount;
+        }
     }
 
     public void updateOptions()
     {
-        if (optionSelectionIndex > optionAmount || optionSelectionIndex < 0)
-        {
-            optionSelectionIndex = optionAmount;
-        }
-
         if (optionAmount == 0)
         {
             hideOptions();
@@ -136,26 +147,26 @@ public class UserInterface : MonoBehaviour
         switch (optionSelectionIndex)
         {
             case 0:
-                optionOneIndicator.SetActive(true);
-                optionTwoIndicator.SetActive(false);
-                optionThreeIndicator.SetActive(false);
+                optionIndicators[0].SetActive(true);
+                optionIndicators[1].SetActive(false);
+                optionIndicators[2].SetActive(false);
                 break;
             case 1:
-                optionOneIndicator.SetActive(false);
-                optionTwoIndicator.SetActive(true);
-                optionThreeIndicator.SetActive(false);
+                optionIndicators[0].SetActive(false);
+                optionIndicators[1].SetActive(true);
+                optionIndicators[2].SetActive(false);
                 break;
             case 2:
-                optionOneIndicator.SetActive(false);
-                optionTwoIndicator.SetActive(false);
-                optionThreeIndicator.SetActive(true);
+                optionIndicators[0].SetActive(false);
+                optionIndicators[1].SetActive(false);
+                optionIndicators[2].SetActive(true);
                 break;
         }
     }
 
     public void exitInteraction()
     {
-        hide();
+        hidePanel();
         hideOptions();
         player.interacting = false;
         currentInteractionIndex = 0;
@@ -164,24 +175,25 @@ public class UserInterface : MonoBehaviour
     public void show(InteractionTree interactionTree)
     {
         player.interacting = true;
-        panel.SetActive(true);
-        uiText.text = interactionTree.dialogues[0].text;
+        dialoguePanel.SetActive(true);
+        dialogueText.text = interactionTree.dialogues[0].text;
         activeInteractionTree = interactionTree;
+        enumerator = getNextDialogue(activeInteractionTree).GetEnumerator();
     }
 
     public void showOptions()
     {
-        options.SetActive(true);
+        optionsPanel.SetActive(true);
     }
 
     public void hideOptions()
     {
-        options.SetActive(false);
+        optionsPanel.SetActive(false);
     }
 
-    public void hide()
+    public void hidePanel()
     {
-        panel.SetActive(false);
+        dialoguePanel.SetActive(false);
     }
 
     void updateClock()
