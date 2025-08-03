@@ -66,7 +66,7 @@ public class UserInterface : MonoBehaviour
                 if (dialogue.options.Count != 0)
                 {
                     // just in case bounds checking
-                    if (optionSelectionIndex > dialogue.options.Count || optionSelectionIndex < 0)
+                    if (optionSelectionIndex >= dialogue.options.Count || optionSelectionIndex < 0)
                     {
                         optionSelectionIndex = 0;
                     }
