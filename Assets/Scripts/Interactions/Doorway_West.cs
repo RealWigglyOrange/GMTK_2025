@@ -11,9 +11,11 @@ public class Doorway_West : MonoBehaviour, IInteractable
     {
         InteractionTree interactionTree = new InteractionTree();
         interactionTree.dialogues = new List<Dialogue>();
-        Dialogue dialogue1 = new Dialogue("Open the door?", -1, new Option("Yes", openDoorScript), new Option("No"));
+        Dialogue dialogue1 = new Dialogue("It's locked", 1);
+        Dialogue dialogue2 = new Dialogue("It has been for a week");
 
         interactionTree.dialogues.Add(dialogue1);
+        interactionTree.dialogues.Add(dialogue2);
         UserInterface.instance.show(interactionTree);
     }
 
