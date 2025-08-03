@@ -65,9 +65,16 @@ public class UserInterface : MonoBehaviour
             {
                 if (dialogue.options.Count != 0)
                 {
-                    // Debug.Log(currentInteractionIndex);
+                    // just in case bounds checking
+                    if (optionSelectionIndex > dialogue.options.Count || optionSelectionIndex < 0)
+                    {
+                        optionSelectionIndex = 0;
+                    }
                     if (currentInteractionIndex != -1)
+                    {
+                        Debug.Log(optionSelectionIndex);
                         dialogue.options[optionSelectionIndex].script?.GetComponent<IOption>().execute();
+                    }
                     if (dialogue.options[optionSelectionIndex].nextIndex != null && currentInteractionIndex != -1)
                     {
                         int next = (int)dialogue.options[optionSelectionIndex].nextIndex;
@@ -122,10 +129,20 @@ public class UserInterface : MonoBehaviour
             {
                 case 0:
                     dialogueText.text = dialogue.text;
+                    dialoguePanel.SetActive(true);
                     hideOptions();
+                    break;
+                case 1:
+                    dialogueText.text = dialogue.text;
+                    dialoguePanel.SetActive(true);
+                    showOptions();
+                    optionsText[0].text = dialogue.options[0].text;
+                    optionsText[1].text = "";
+                    optionsText[2].text = "";
                     break;
                 case 2:
                     dialogueText.text = dialogue.text;
+                    dialoguePanel.SetActive(true);
                     showOptions();
                     optionsText[0].text = dialogue.options[0].text;
                     optionsText[1].text = dialogue.options[1].text;
@@ -133,6 +150,7 @@ public class UserInterface : MonoBehaviour
                     break;
                 case 3:
                     dialogueText.text = dialogue.text;
+                    dialoguePanel.SetActive(true);
                     showOptions();
                     optionsText[0].text = dialogue.options[0].text;
                     optionsText[1].text = dialogue.options[1].text;
@@ -183,11 +201,11 @@ public class UserInterface : MonoBehaviour
 
     public void exitInteraction()
     {
-        // Debug.Log("exited");
         hidePanel();
         hideOptions();
         player.interacting = false;
         currentInteractionIndex = -1;
+        optionSelectionIndex = 0;
         activeInteractionTree = null;
         optionAmount = 0;
     }
@@ -195,7 +213,7 @@ public class UserInterface : MonoBehaviour
     public void show(InteractionTree interactionTree)
     {
         player.interacting = true;
-        dialoguePanel.SetActive(true);
+        // dialoguePanel.SetActive(true);
         activeInteractionTree = interactionTree;
     }
 
