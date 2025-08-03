@@ -17,7 +17,7 @@ public class Bed : MonoBehaviour, IInteractable
         Dialogue dialogue2 = new Dialogue("That's a really bad idea.");
         Dialogue dialogue3;
 
-        if (progress.thrownLamp)
+        if (progress.thrownLamp && progress.safeOpened)
         {
             dialogue3 = new Dialogue("Are you ready? All you have to do is lock the closet door.", new Option("yes", hide));
         } else

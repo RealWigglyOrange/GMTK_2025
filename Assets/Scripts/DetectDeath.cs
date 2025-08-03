@@ -18,7 +18,7 @@ public class DetectDeath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GM.timer >= 60)
+        if (GM.timer >= 60 && !Progress.underBed)
         {
             killPlayer();
         } else if (GM.timer >= 30 && (!Progress.boardedWindows ^ !Progress.bookshelf))
