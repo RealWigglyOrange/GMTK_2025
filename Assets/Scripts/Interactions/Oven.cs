@@ -8,6 +8,7 @@ public class Oven : MonoBehaviour, IInteractable
     [SerializeField] private GameMode GM;
     [SerializeField] private Progress progress;
     [SerializeField] private GameObject openDoorScript;
+    [SerializeField] Doorway_West door;
 
     public void interact()
     {
@@ -18,7 +19,8 @@ public class Oven : MonoBehaviour, IInteractable
 
         if (GM.minutes == 5)
         {
-            dialogue = new Dialogue("You heard a click from the bedroom door.", new Option("ooo what happened", openDoorScript));
+            dialogue = new Dialogue("You heard a click from the bedroom door.");
+            door.open();
             progress.bedroomOpened = true;
         }
         else

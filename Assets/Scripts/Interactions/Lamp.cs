@@ -5,6 +5,7 @@ public class Lamp : MonoBehaviour, IInteractable
 {
     [SerializeField] private Progress progress;
     [SerializeField] private GameObject go;
+    [SerializeField] BoxCollider2D nightstand;
 
     public void interact()
     {
@@ -13,6 +14,7 @@ public class Lamp : MonoBehaviour, IInteractable
 
         Dialogue dialogue = new Dialogue("You pick up the lamp");
         go.SetActive(false);
+        nightstand.enabled = true;
         progress.hasLamp = true;
 
         interactionTree.dialogues.Add(dialogue);
