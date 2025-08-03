@@ -1,7 +1,29 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class Lamp : MonoBehaviour
+public class Lamp : MonoBehaviour, IInteractable
 {
+    [SerializeField] private Progress progress;
+    [SerializeField] private GameObject go;
+
+    public void interact()
+    {
+        InteractionTree interactionTree = new InteractionTree();
+        interactionTree.dialogues = new List<Dialogue>();
+
+        Dialogue dialogue = new Dialogue("You pick up the lamp");
+        go.SetActive(false);
+        progress.hasLamp = true;
+
+        interactionTree.dialogues.Add(dialogue);
+        UserInterface.instance.show(interactionTree);
+    }
+
+    public void triggerInteract()
+    {
+        
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
