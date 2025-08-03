@@ -72,7 +72,7 @@ public class UserInterface : MonoBehaviour
                     }
                     if (currentInteractionIndex != -1)
                     {
-                        Debug.Log(optionSelectionIndex);
+                        // Debug.Log(optionSelectionIndex);
                         dialogue.options[optionSelectionIndex].script?.GetComponent<IOption>().execute();
                     }
                     if (dialogue.options[optionSelectionIndex].nextIndex != null && currentInteractionIndex != -1)
