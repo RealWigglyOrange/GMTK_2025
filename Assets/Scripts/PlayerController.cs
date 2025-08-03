@@ -160,11 +160,6 @@ public class PlayerController : MonoBehaviour
     void Movement(float t)
     {
         transform.position += Vector3.Normalize(new Vector3(Hin, Vin)) * speed * t;
-        if (progress.bedroomOpened)
-        {
-            cam.transform.position = Vector2.Lerp(cam.transform.position, transform.position, 0.25f);
-            cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -10.0f);
-        }
     }
 
     public void resetPlayer()
