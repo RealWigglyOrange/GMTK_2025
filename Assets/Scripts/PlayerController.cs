@@ -75,6 +75,10 @@ public class PlayerController : MonoBehaviour
         Vin = Input.GetAxis("Vertical");
         Hin = Input.GetAxis("Horizontal");
         tryInteract = Input.GetKeyDown(KeyCode.F);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         // FOR THE LOVE OF GOD DON'T CHANGE HOW THIS CODE WORKS
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
