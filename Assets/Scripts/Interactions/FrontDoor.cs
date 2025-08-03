@@ -18,15 +18,20 @@ public class FrontDoor : MonoBehaviour, IInteractable
             dialogue1 = new Dialogue("...");
         } else
         {
-            dialogue1 = new Dialogue("You can here someone outside your door trying to get inside", new Option("Would you like some tee?", 1), new Option("Is there any particular reason you're trying to brutally murder me?", 1));
+            dialogue1 = new Dialogue("You can here someone outside your door trying to get inside", new Option("Offer Tea", 1), new Option("Diplomacy", 2));
         }
 
-        Dialogue dialogue2 = new Dialogue("gmtkJameJam2025");
+        Dialogue dialogue2 = new Dialogue("You: Would you like some tee?", 3);
+        Dialogue dialogue3 = new Dialogue("You: Is there any particular reason you're trying to brutally murder me?", 3);
+
+        Dialogue dialogue4 = new Dialogue("Shadow Man: gmtkJameJam2025");
 
         PermenantProgress.hasPCpass = true;
 
         interactionTree.dialogues.Add(dialogue1);
         interactionTree.dialogues.Add(dialogue2);
+        interactionTree.dialogues.Add(dialogue3);
+        interactionTree.dialogues.Add(dialogue4);
 
         UserInterface.instance.show(interactionTree);
     }
