@@ -64,7 +64,7 @@ public class DetectDeath : MonoBehaviour
 
         if (localTimer <= 0)
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Level");
             /*
             GM.timer = 0;
             Progress.clear();

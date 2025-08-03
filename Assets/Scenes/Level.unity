@@ -5888,7 +5888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1125978924
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9906,6 +9906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8cfacdc81abde409b3b92eb243f167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winText: {fileID: 1125978923}
 --- !u!1 &1851331174
 GameObject:
   m_ObjectHideFlags: 0
@@ -12674,6 +12675,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 69746210}
     m_Modifications:
+    - target: {fileID: 4165529260299201128, guid: 8bd27873daf72bff0aa5890958de9285, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4986476645781007666, guid: 8bd27873daf72bff0aa5890958de9285, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.56
